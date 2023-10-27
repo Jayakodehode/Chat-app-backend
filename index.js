@@ -15,6 +15,10 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
+app.get("/", (req, res) => {
+  res.send("welcome to our chatapp-api");
+});
+
 //connecting to mongodb database using mongoose
 mongoose
   .connect(process.env.MONGO_URL)
@@ -28,7 +32,10 @@ const server = app.listen(process.env.PORT, () => {
 //socket creation
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://chat-app-frontend-igyk.onrender.com",
+    ],
     Credentials: true,
   },
 });

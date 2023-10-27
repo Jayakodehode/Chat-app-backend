@@ -61,6 +61,7 @@ module.exports.login = async (req, res, next) => {
   }
 };
 module.exports.getAllUsers = async (req, res, next) => {
+  console.log(req.body);
   try {
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "username",
